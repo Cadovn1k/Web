@@ -1,0 +1,156 @@
+using System.Collections;
+//var builder = WebApplication.CreateBuilder(args);
+
+//// Add services to the container.
+//builder.Services.AddRazorPages();
+
+//var app = builder.Build();
+
+//// Configure the HTTP request pipeline.
+//if (!app.Environment.IsDevelopment())
+//{
+//    app.UseExceptionHandler("/Error");
+//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+//    app.UseHsts();
+//}
+
+//app.UseHttpsRedirection();
+//app.UseStaticFiles();
+
+//app.UseRouting();
+
+//app.UseAuthorization();
+
+//app.MapRazorPages();
+
+//app.Run();
+
+using System.Text.RegularExpressions;
+
+// Номер один
+Console.WriteLine("Номер 1\n");
+string pattern1 = @"((^[\+-]?(0(?=\.)|[1-9]\d*)(\.(((0+)(?=[1-9]+))|([1-9]+))+(\((\d*[1-9]+\d*)\))?)?)|((^0)(?!\.)))";
+Regex regex1 = new Regex(@"^((([+-]?[1-9]\d*)|0)([.,]\d?[1-9]*)?|[+-]0[.,]\d?[1-9]*)(\(\d*\))?$");
+string[] names1 = { "3.22", "-7.5", "0.5(101)", "0001", "-0", "3.450" , "+2"};
+foreach (string name in names1)
+    Console.WriteLine(name + " " + regex1.IsMatch(name));
+
+// Номер 2
+Console.WriteLine("\nНомер 2\n");
+Regex regex2 = new Regex("^(0+|1+|((01)+0?)|((10)+1?))$");
+string[] names2 = { "1111111", "101000101", "101010101", "0000001" };
+Console.Write("Наши выражения : ");
+foreach (string item in names2)
+    Console.Write(item + " ");
+Console.WriteLine("\nПравильные : ");
+foreach (string name in names2)
+    foreach (var s in regex2.Matches(name))
+        Console.WriteLine(s);
+
+// Номер 3
+Console.WriteLine("\nНомер 3\n");
+Random x = new Random();
+Regex regex3 = new Regex(@"^\d*[02468]$");
+int count31 = 0;
+int count32 = 0;
+while (count32 < 10)
+{
+    int n = x.Next(1, 1000);
+    string s = n.ToString();
+    if (regex3.IsMatch(s))
+    {
+        count32++;
+        Console.Write(s + "\n");
+    }
+    count31++;
+}
+Console.Write("Общее количество сгенерированных чисел = " + count31 + "\n");
+
+// Номер 4
+Console.WriteLine("\nНомер 4\n");
+Regex regex4 = new Regex(@"^[13579]*[02468]{0,2}[13579]*$");
+int count41 = 0;
+int count42 = 0;
+while (count42 < 10)
+{
+    int n = x.Next(1, 1000000);
+    string s = n.ToString();
+    if (regex4.IsMatch(s))
+    {
+        count42++;
+        Console.Write(s + "\n");
+    }
+    count41++;
+}
+Console.Write("Общее количество сгенерированных чисел = " + count41 + "\n");
+
+// Номер 5
+Console.WriteLine("\nНомер 5\n");
+Regex regex5 = new Regex(@"^[02468]{4,5}$");
+int count51 = 0;
+int count52 = 0;
+while (count52 < 10)
+{
+    int n = x.Next(1, 1000000);
+    string s = n.ToString();
+    if (regex5.IsMatch(s))
+    {
+        count52++;
+        Console.Write(s + "\n");
+    }
+    count51++;
+}
+Console.Write("Общее количество сгенерированных чисел = " + count51 + "\n");
+
+// Номер 6
+Console.WriteLine("\nНомер 6\n");
+Regex regex6 = new Regex(@"^\d*[02468]{2}\d*[02468]{2}\d*$");
+int count61 = 0;
+int count62 = 0;
+while (count62 < 10)
+{
+    int n = x.Next(1, 1000000);
+    string s = n.ToString();
+    if (regex6.IsMatch(s))
+    {
+        count62++;
+        Console.Write(s + "\n");
+    }
+    count61++;
+}
+Console.Write("Общее количество сгенерированных чисел = " + count61 + "\n");
+
+// Номер 7
+Console.WriteLine("\nНомер 7\n");
+Regex regex7 = new Regex(@"^((0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](1(2[3-9][8-9]|[3-8][0-9][0-9]|9[0-7][0-7]))\s([0-1]\d|2[0-3])(:[0-5]\d))|((((0[6-9]|[12][0-9]|3[01])[/](03))|((0[1-9]|[12][0-9]|3[01])[/](0[4-9]|1[012])))[/](1237)\s(1[2-9]|2[0-3])(:[0-5]\d))$|((((0[1-9]|1[0-9]|2[0-7])[/](02))|((0[1-9]|[12][0-9]|3[01])[/](01)))[/](1978)\s([0-1]\d|2[01])(:(([0-2]\d)|(3[0-5]))))$");
+
+string[] names = { "01/03/1900 23:46", "23/12/1238 12:08", "32/1/1000", "06/03/1237 12:00", "27/02/1978 21:35" };
+foreach (string name in names)
+    Console.WriteLine(name + " " + regex7.IsMatch(name));
+
+// Номер 8
+Console.WriteLine("\nНомер 8\n");
+
+Console.WriteLine("Пароли : ");
+Regex regex8_pass = new Regex(@"^[a-z,A-Z,\d]*[a-z]+[a-z,A-Z,\d]*[A-Z]+[a-z,A-Z,\d]*\d+[a-z,A-Z,\d]*$");
+string[] names8_pass = { "AjАfj", "fkdkdkD1fkd", "dkffkd3/" };
+foreach (string name in names8_pass)
+    Console.WriteLine(name + " " + regex8_pass.IsMatch(name));
+
+Console.WriteLine("\nНомера : ");
+Regex regex8_number = new Regex(@"^[\+,1-9](?(?<=\+)([1-9]\(?(?(?<=\()(\d{3}\)\d{3}\-?\d{2}\-?\d{2}$)|(\d{3}\-?\d{3}\-?\d{2}\-?\d{2}$)))|(\(?(?(?<=\()(\d{3}\)\d{3}\-?\d{2}\-?\d{2}$)|(\d{3}\-?\d{3}\-?\d{2}\-?\d{2}$))))");
+string[] names8_number = { "+7(901)721-73-44", "89017217344", "8901721734а4", "3923923939243" };
+foreach (string name in names8_number)
+    Console.WriteLine(name + " " + regex8_number.IsMatch(name));
+
+Console.WriteLine("\nДаты : ");
+Regex regex8_date = new Regex(@"^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]([01][0-9]{2}|2[0]([01][0-9]|20))");
+string[] names8_date = { "02/12/2012", "21/213/2122", "22/123/3313", "21/02/2012" };
+foreach (string name in names8_date)
+    Console.WriteLine(name + " " + regex8_date.IsMatch(name));
+
+Console.WriteLine("\nE-Mail : ");
+Regex regex8_mail = new Regex(@"^[\d,\w]*@\w*.(com)?(ru)?$");
+string[] names8_mail = { "fdkdfk@mail.ru", "fdkdfk@mail.com", "fdkdfkmail.ru" };
+foreach (string name in names8_mail)
+    Console.WriteLine(name + " " + regex8_mail.IsMatch(name));
